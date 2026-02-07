@@ -3,121 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>West Front Range</title>
+    <title>West Front | Precision Rifle Series</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'tactical-dark': '#1a1a1a', // Dark grey from logo bg
-                        'tactical-gold': '#c5a065', // Gold from logo border
-                        'tactical-red': '#dc2626', // Red accent
-                    },
-                    fontFamily: {
-                        sans: ['Roboto', 'sans-serif'],
-                    }
-                }
-            }
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            overflow-x: hidden;
         }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+        
+        .glass-card {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 160, 101, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(197, 160, 101, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 160, 101, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        .neon-glow {
+            text-shadow: 0 0 5px rgba(197, 160, 101, 0.5), 0 0 10px rgba(197, 160, 101, 0.3);
+        }
+        
+        .gold-border {
+            border: 1px solid rgba(197, 160, 101, 0.5);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+        
+        .stats-ticker {
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
-<body class="bg-tactical-dark text-white font-sans antialiased">
-
-    <!-- Navbar -->
-    <nav class="border-b border-tactical-gold/30 bg-black/50 backdrop-blur-md fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-tactical-gold font-black text-xl tracking-tighter uppercase">West Front</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#" class="text-white hover:text-tactical-gold px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="#" class="text-gray-300 hover:text-tactical-gold px-3 py-2 rounded-md text-sm font-medium">Matches</a>
-                        <a href="#" class="text-gray-300 hover:text-tactical-gold px-3 py-2 rounded-md text-sm font-medium">Rankings</a>
-                        <a href="#" class="bg-tactical-red hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-bold uppercase tracking-wide transition-colors">Register</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+<body class="bg-gray-900 text-white">
     <!-- Hero Section -->
-    <div class="relative bg-tactical-dark overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <div class="relative z-10 pb-8 bg-tactical-dark sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-32 px-4">
-                <main class="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
-                    <div class="sm:text-center lg:text-left">
-                        <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                            <span class="block xl:inline">AMAT VICTORIA</span>
-                            <span class="block text-tactical-gold xl:inline">CURAM</span>
-                        </h1>
-                        <p class="mt-3 text-base text-gray-400 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Precision Rifle Series (PRS) Tournaments. Join the elite. Test your limits. Register for the next match now.
-                        </p>
-                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                            <div class="rounded-md shadow">
-                                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-sm text-white bg-tactical-red hover:bg-red-700 md:py-4 md:text-lg uppercase tracking-wider">
-                                    Register for Match
-                                </a>
-                            </div>
-                            <div class="mt-3 sm:mt-0 sm:ml-3">
-                                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-tactical-gold text-base font-medium rounded-sm text-tactical-gold bg-transparent hover:bg-tactical-gold/10 md:py-4 md:text-lg uppercase tracking-wider">
-                                    View Rules
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+    <section class="relative h-screen flex items-center justify-center parallax-bg" style="background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%231a1a1a\'/><path d=\'M0 0L100 100M100 0L0 100\' stroke=\'%23c5a065\' stroke-width=\'0.5\' opacity=\'0.1\'/></svg>')">
+        <div class="text-center z-10 px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 neon-glow">WEST FRONT</h1>
+            <p class="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-gray-300">Precision Rifle Series for Elite Shooters</p>
+            <button class="pulse bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105">
+                REGISTER NOW
+            </button>
         </div>
-        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-black/50 flex items-center justify-center border-l border-tactical-gold/20">
-            <!-- Placeholder for Logo -->
-            <div class="text-center opacity-50">
-                <img src="https://i.imgur.com/placeholder-logo.png" alt="West Front Logo" class="h-64 w-auto mx-auto grayscale hover:grayscale-0 transition-all duration-500">
-                <p class="mt-4 text-gray-500 uppercase tracking-widest text-sm">West Front Range</p>
+        <div class="absolute bottom-10 left-0 right-0 text-center animate-bounce">
+            <svg class="w-6 h-6 mx-auto text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Stats Ticker -->
+    <div class="bg-gray-800 py-3 overflow-hidden">
+        <div class="stats-ticker flex whitespace-nowrap">
+            <div class="mx-8 text-xl">
+                <span class="text-gold font-bold">1,247</span> ACTIVE PARTICIPANTS
+            </div>
+            <div class="mx-8 text-xl">
+                <span class="text-gold font-bold">2.4M+</span> TOTAL SHOTS FIRED
+            </div>
+            <div class="mx-8 text-xl">
+                <span class="text-gold font-bold">386</span> MATCHES COMPLETED
+            </div>
+            <div class="mx-8 text-xl">
+                <span class="text-gold font-bold">98%</span> ACCURACY RATE
+            </div>
+            <div class="mx-8 text-xl">
+                <span class="text-gold font-bold">15</span> COUNTRIES REPRESENTED
             </div>
         </div>
     </div>
 
-    <!-- Match Schedule -->
-    <div class="bg-[#121212] py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-tactical-red tracking-wide uppercase">Schedule</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">Upcoming Matches</p>
-            </div>
-
-            <div class="mt-10">
-                <div class="flex flex-col space-y-4">
-                    <!-- Match Item -->
-                    <div class="bg-tactical-dark border-l-4 border-tactical-gold p-6 flex flex-col md:flex-row justify-between items-center shadow-lg hover:bg-[#222] transition-colors">
-                        <div class="mb-4 md:mb-0 text-center md:text-left">
-                            <h3 class="text-xl font-bold text-white uppercase">Alpha Sector Opener</h3>
-                            <p class="text-gray-400">Feb 22, 2026 • Batumi Range</p>
+    <!-- Features Grid -->
+    <section class="py-20 px-4 grid-bg">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 neon-glow">TACTICAL FEATURES</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Live Scoring Card -->
+                <div class="glass-card gold-border p-8 rounded-xl hover-lift">
+                    <div class="text-gold text-5xl mb-4">🎯</div>
+                    <h3 class="text-2xl font-bold mb-3">LIVE SCORING</h3>
+                    <p class="text-gray-300 mb-4">Real-time scoring updates with millisecond precision. Track your performance against elite competitors worldwide.</p>
+                    <div class="mt-6">
+                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gold w-3/4"></div>
                         </div>
-                        <div class="flex items-center space-x-4">
-                            <span class="px-3 py-1 text-xs font-bold text-green-400 bg-green-900/30 rounded uppercase">Registration Open</span>
-                            <a href="#" class="px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-colors uppercase text-sm font-bold">Details</a>
+                        <div class="flex justify-between mt-2 text-sm">
+                            <span>Your Score</span>
+                            <span>87.4%</span>
                         </div>
                     </div>
-
-                    <!-- Match Item -->
-                    <div class="bg-tactical-dark border-l-4 border-gray-600 p-6 flex flex-col md:flex-row justify-between items-center shadow-lg opacity-75">
-                        <div class="mb-4 md:mb-0 text-center md:text-left">
-                            <h3 class="text-xl font-bold text-white uppercase">Steel Challenge II</h3>
-                            <p class="text-gray-400">Mar 15, 2026 • Tbilisi Range</p>
+                </div>
+                
+                <!-- Leaderboard Card -->
+                <div class="glass-card gold-border p-8 rounded-xl hover-lift">
+                    <div class="text-gold text-5xl mb-4">🏆</div>
+                    <h3 class="text-2xl font-bold mb-3">GLOBAL LEADERBOARD</h3>
+                    <p class="text-gray-300 mb-4">Climb the ranks among the world's most elite precision shooters. Real-time global rankings updated continuously.</p>
+                    <div class="mt-6">
+                        <div class="flex items-center mb-2">
+                            <div class="w-6 h-6 bg-gold rounded-full flex items-center justify-center mr-2">#1</div>
+                            <span>Sniper_X</span>
                         </div>
-                        <div class="flex items-center space-x-4">
-                            <span class="px-3 py-1 text-xs font-bold text-gray-400 bg-gray-800 rounded uppercase">Coming Soon</span>
+                        <div class="flex items-center mb-2">
+                            <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center mr-2">#2</div>
+                            <span>TacticalPro</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-red-800 rounded-full flex items-center justify-center mr-2">#3</div>
+                            <span>You</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Match Calendar Card -->
+                <div class="glass-card gold-border p-8 rounded-xl hover-lift">
+                    <div class="text-gold text-5xl mb-4">📅</div>
+                    <h3 class="text-2xl font-bold mb-3">MATCH CALENDAR</h3>
+                    <p class="text-gray-300 mb-4">Access upcoming competitions, training schedules, and exclusive events. Plan your tactical preparation.</p>
+                    <div class="mt-6">
+                        <div class="flex items-center mb-3">
+                            <div class="w-3 h-3 bg-gold rounded-full mr-3"></div>
+                            <span>Global Championship</span>
+                        </div>
+                        <div class="flex items-center mb-3">
+                            <div class="w-3 h-3 bg-red-600 rounded-full mr-3"></div>
+                            <span>Elite Training Camp</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-gray-600 rounded-full mr-3"></div>
+                            <span>Regional Qualifier</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- Tactical Info Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6 neon-glow">PRECISION AT EXTREME DISTANCES</h2>
+                    <p class="text-xl text-gray-300 mb-6">
+                        West Front represents the pinnacle of precision rifle competition. Our courses challenge shooters with targets at distances exceeding 1000 yards, requiring mastery of ballistics, wind reading, and mental fortitude.
+                    </p>
+                    <p class="text-lg text-gray-400 mb-8">
+                        With certified ranges across 15 countries and partnerships with leading manufacturers, we provide the most rigorous testing ground for elite marksmanship skills.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass-card gold-border p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-gold mb-2">Ballistic Calculators</h3>
+                            <p class="text-gray-300">Advanced atmospheric sensors and ballistics software for precise shot solutions.</p>
+                        </div>
+                        <div class="glass-card gold-border p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-gold mb-2">Weather Monitoring</h3>
+                            <p class="text-gray-300">Real-time wind speed, direction, temperature, and humidity data.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card gold-border rounded-2xl p-4">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='500' height='400' fill='%232a2a2a'/><circle cx='250' cy='200' r='150' fill='none' stroke='%23c5a065' stroke-width='2' opacity='0.3'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23c5a065' stroke-width='2' opacity='0.4'/><circle cx='250' cy='200' r='50' fill='none' stroke='%23c5a065' stroke-width='2' opacity='0.6'/><circle cx='250' cy='200' r='25' fill='none' stroke='%23c5a065' stroke-width='2' opacity='0.8'/><circle cx='250' cy='200' r='10' fill='%23dc2626'/><line x1='200' y1='200' x2='300' y2='200' stroke='%23dc2626' stroke-width='2'/><line x1='250' y1='150' x2='250' y2='250' stroke='%23dc2626' stroke-width='2'/></svg>" alt="Precision Target" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gold">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 neon-glow">WEST FRONT</h3>
+                    <p class="text-gray-400">The premier precision rifle series for elite shooters worldwide.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gold">COMPETITIONS</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Global Championship</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Regional Qualifiers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Training Camps</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Private Events</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gold">RESOURCES</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Ballistics Calculator</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Weather Data</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Training Videos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition">Equipment Guides</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gold">CONTACT</h4>
+                    <address class="text-gray-400 not-italic">
+                        West Front Precision<br>
+                        Tactical Operations Center<br>
+                        1247 Elite Range Road<br>
+                        Colorado Springs, CO 80903<br>
+                        <br>
+                        ops@westfrontprs.com<br>
+                        +1 (719) 555-TACTIC
+                    </address>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>&copy; 2026 West Front Precision Rifle Series. All rights reserved. For authorized personnel only.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
