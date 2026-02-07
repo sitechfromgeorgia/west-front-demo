@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>West Front Range</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tactical-dark': '#1a1a1a', // Dark grey from logo bg
+                        'tactical-gold': '#c5a065', // Gold from logo border
+                        'tactical-red': '#dc2626', // Red accent
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-tactical-dark text-white font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="border-b border-tactical-gold/30 bg-black/50 backdrop-blur-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-tactical-gold font-black text-xl tracking-tighter uppercase">West Front</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="text-white hover:text-tactical-gold px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#" class="text-gray-300 hover:text-tactical-gold px-3 py-2 rounded-md text-sm font-medium">Matches</a>
+                        <a href="#" class="text-gray-300 hover:text-tactical-gold px-3 py-2 rounded-md text-sm font-medium">Rankings</a>
+                        <a href="#" class="bg-tactical-red hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-bold uppercase tracking-wide transition-colors">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative bg-tactical-dark overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-tactical-dark sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-32 px-4">
+                <main class="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                            <span class="block xl:inline">AMAT VICTORIA</span>
+                            <span class="block text-tactical-gold xl:inline">CURAM</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-400 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Precision Rifle Series (PRS) Tournaments. Join the elite. Test your limits. Register for the next match now.
+                        </p>
+                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                            <div class="rounded-md shadow">
+                                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-sm text-white bg-tactical-red hover:bg-red-700 md:py-4 md:text-lg uppercase tracking-wider">
+                                    Register for Match
+                                </a>
+                            </div>
+                            <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-tactical-gold text-base font-medium rounded-sm text-tactical-gold bg-transparent hover:bg-tactical-gold/10 md:py-4 md:text-lg uppercase tracking-wider">
+                                    View Rules
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-black/50 flex items-center justify-center border-l border-tactical-gold/20">
+            <!-- Placeholder for Logo -->
+            <div class="text-center opacity-50">
+                <img src="https://i.imgur.com/placeholder-logo.png" alt="West Front Logo" class="h-64 w-auto mx-auto grayscale hover:grayscale-0 transition-all duration-500">
+                <p class="mt-4 text-gray-500 uppercase tracking-widest text-sm">West Front Range</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Match Schedule -->
+    <div class="bg-[#121212] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold text-tactical-red tracking-wide uppercase">Schedule</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">Upcoming Matches</p>
+            </div>
+
+            <div class="mt-10">
+                <div class="flex flex-col space-y-4">
+                    <!-- Match Item -->
+                    <div class="bg-tactical-dark border-l-4 border-tactical-gold p-6 flex flex-col md:flex-row justify-between items-center shadow-lg hover:bg-[#222] transition-colors">
+                        <div class="mb-4 md:mb-0 text-center md:text-left">
+                            <h3 class="text-xl font-bold text-white uppercase">Alpha Sector Opener</h3>
+                            <p class="text-gray-400">Feb 22, 2026 • Batumi Range</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="px-3 py-1 text-xs font-bold text-green-400 bg-green-900/30 rounded uppercase">Registration Open</span>
+                            <a href="#" class="px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-colors uppercase text-sm font-bold">Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Match Item -->
+                    <div class="bg-tactical-dark border-l-4 border-gray-600 p-6 flex flex-col md:flex-row justify-between items-center shadow-lg opacity-75">
+                        <div class="mb-4 md:mb-0 text-center md:text-left">
+                            <h3 class="text-xl font-bold text-white uppercase">Steel Challenge II</h3>
+                            <p class="text-gray-400">Mar 15, 2026 • Tbilisi Range</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="px-3 py-1 text-xs font-bold text-gray-400 bg-gray-800 rounded uppercase">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
