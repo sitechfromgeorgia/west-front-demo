@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>West Front Range | სასროლეთი</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -214,8 +215,14 @@
             <a href="#" class="nav-link" data-i18n="navAbout">ჩვენს შესახებ</a>
         </nav>
 
-        <!-- Right Side: Lang + Mobile Toggle -->
+        <!-- Right Side: Lang + Social + Mobile Toggle -->
         <div class="flex items-center gap-4">
+            <!-- Social Icons -->
+            <div class="hidden md:flex gap-3 mr-2">
+                <a href="#" class="gold hover:text-white transition-colors text-xl"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="gold hover:text-white transition-colors text-xl"><i class="fab fa-youtube"></i></a>
+            </div>
+
             <div class="flex gap-1">
                 <button class="lang-btn active !px-2 !py-1" data-lang="ka">GE</button>
                 <button class="lang-btn !px-2 !py-1" data-lang="en">EN</button>
@@ -318,6 +325,32 @@
             PRS GEORGIA • ოფიციალური პარტნიორი
         </div>
     </div>
+
+    <!-- Partner Social Media Section -->
+    <div class="relative z-10 py-10 border-t border-white/5 bg-black/30">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="brand text-xl gold mb-6 tracking-widest" data-i18n="partnersSocial">პარტნიორების სოციალური მედია</h3>
+            <div class="flex flex-wrap justify-center gap-10">
+                <!-- Partner 1 -->
+                <div class="flex flex-col items-center gap-2">
+                    <span class="text-xs text-gray-500 font-bold uppercase tracking-widest">PRS GEORGIA</span>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-lg"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-lg"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <!-- Partner 2 -->
+                <div class="flex flex-col items-center gap-2">
+                    <span class="text-xs text-gray-500 font-bold uppercase tracking-widest">FEDERATION</span>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-lg"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-lg"><i class="fab fa-web"></i></a>
+                    </div>
+                </div>
+                <!-- More partners can be added here -->
+            </div>
+        </div>
+    </div>
     
     <!-- Footer -->
     <footer class="relative z-10 text-center py-6 text-gray-600 text-sm">
@@ -358,7 +391,8 @@
                 featurePRS: "PRS შეჯიბრებები",
                 featureTraining: "წვრთნა",
                 cta: "რეგისტრაცია",
-                partner: "PRS GEORGIA • ოფიციალური პარტნიორი"
+                partner: "PRS GEORGIA • ოფიციალური პარტნიორი",
+                partnersSocial: "პარტნიორების სოციალური მედია"
             },
             en: {
                 navPrecision: "Precision Shooting",
@@ -382,7 +416,8 @@
                 featurePRS: "PRS Competitions",
                 featureTraining: "Training",
                 cta: "Register",
-                partner: "PRS GEORGIA • Official Partner"
+                partner: "PRS GEORGIA • Official Partner",
+                partnersSocial: "PARTNER SOCIAL MEDIA"
             },
             ua: {
                 navPrecision: "Високоточна стрільба",
@@ -406,7 +441,8 @@
                 featurePRS: "PRS змагання",
                 featureTraining: "Тренування",
                 cta: "Реєстрація",
-                partner: "PRS GEORGIA • Офіційний партнер"
+                partner: "PRS GEORGIA • Офіційний партнер",
+                partnersSocial: "СОЦІАЛЬНІ МЕРЕЖІ ПАРТНЕРІВ"
             }
         };
         
