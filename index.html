@@ -142,24 +142,27 @@
             padding: 15px 0;
             overflow: hidden;
             position: relative;
-        }
-        .ad-track {
-            display: flex;
-            transition: transform 1s ease-in-out;
-            width: 300%;
+            height: 350px;
         }
         .ad-slide {
-            flex: 0 0 33.333%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 350px;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .ad-slide.active {
+            opacity: 1;
         }
         .ad-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 1;
         }
 
         /* Article Card Styles */
@@ -247,8 +250,7 @@
     <!-- Ad Banner Carousel (Rotating Sponsor Banners) -->
     <div class="relative z-10 pt-20">
         <div class="ad-carousel">
-            <div class="ad-track" id="adTrack">
-                <div class="ad-slide">
+                <div class="ad-slide active">
                     <img src="assets/ad-mtac.jpg" alt="M-TAC / Militarist.ge">
                 </div>
                 <div class="ad-slide">
@@ -257,7 +259,6 @@
                 <div class="ad-slide">
                     <img src="assets/banner-geprf.jpg" alt="Georgian Precision Rifle Federation">
                 </div>
-            </div>
         </div>
     </div>
 
@@ -548,15 +549,15 @@
         // Set initial language
         setLanguage(currentLang);
 
-        // Ad Carousel Logic
-        const adTrack = document.getElementById('adTrack');
+        // Ad Carousel Logic (fade)
         const adSlides = document.querySelectorAll('.ad-slide');
         let adIndex = 0;
 
         setInterval(() => {
-            if (adSlides.length > 0) {
+            if (adSlides.length > 1) {
+                adSlides[adIndex].classList.remove('active');
                 adIndex = (adIndex + 1) % adSlides.length;
-                adTrack.style.transform = `translateX(-${adIndex * 33.333}%)`;
+                adSlides[adIndex].classList.add('active');
             }
         }, 5000);
     </script>
