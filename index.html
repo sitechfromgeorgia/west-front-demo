@@ -141,7 +141,7 @@
             width: 100%;
             background: #000;
             border-bottom: 1px solid rgba(197, 160, 101, 0.2);
-            padding: 15px 0;
+            padding: 0;
             overflow: hidden;
             position: relative;
             height: 350px;
@@ -552,16 +552,18 @@
         setLanguage(currentLang);
 
         // Ad Carousel Logic (fade)
-        const adSlides = document.querySelectorAll('.ad-slide');
+        const adSlides = document.querySelectorAll('.ad-carousel .ad-slide');
         let adIndex = 0;
+        console.log('Ad slides found:', adSlides.length);
 
-        setInterval(() => {
-            if (adSlides.length > 1) {
+        if (adSlides.length > 1) {
+            setInterval(() => {
                 adSlides[adIndex].classList.remove('active');
                 adIndex = (adIndex + 1) % adSlides.length;
                 adSlides[adIndex].classList.add('active');
-            }
-        }, 5000);
+                console.log('Ad switched to:', adIndex);
+            }, 4000);
+        }
     </script>
 </body>
 </html>
