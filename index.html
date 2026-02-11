@@ -79,7 +79,88 @@
             background: #c5a065;
             color: #000;
         }
+
+        /* Header & Nav */
+        header {
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(197, 160, 101, 0.2);
+        }
+        .nav-link {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .nav-link:hover {
+            color: #c5a065;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(15, 15, 15, 0.98);
+            min-width: 280px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+            z-index: 100;
+            border: 1px solid rgba(197, 160, 101, 0.3);
+            backdrop-filter: blur(15px);
+            padding: 10px 0;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: #f0f0f0;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid rgba(197, 160, 101, 0.05);
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            font-family: 'Noto Sans Georgian', sans-serif;
+        }
+        .dropdown-content a:hover {
+            background: rgba(197, 160, 101, 0.1);
+            color: #c5a065;
+            padding-left: 25px;
+        }
         
+        /* Ad Banner Carousel (PRS Style) */
+        .ad-carousel {
+            width: 100%;
+            background: #000;
+            border-bottom: 1px solid rgba(197, 160, 101, 0.2);
+            padding: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .ad-track {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            width: 100%;
+        }
+        .ad-slide {
+            flex: 0 0 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+        }
+        .ad-slide img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
         .data-box {
             background: rgba(0,0,0,0.7);
             border: 1px solid rgba(197, 160, 101, 0.4);
@@ -112,15 +193,58 @@
     </div>
     <div class="overlay"></div>
 
-    <!-- Language Switcher -->
-    <div class="fixed top-2 right-2 z-50 flex gap-1 opacity-90">
-        <button class="lang-btn active" data-lang="ka">🇬🇪 GEO</button>
-        <button class="lang-btn" data-lang="en">🇬🇧 ENG</button>
-        <button class="lang-btn" data-lang="ua">🇺🇦 UKR</button>
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 px-4 md:px-10 py-4 flex justify-between items-center">
+        <!-- Brand/Home -->
+        <a href="#" class="brand text-xl font-bold tracking-tighter gold">WF<span class="text-white">RANGE</span></a>
+        
+        <!-- Main Nav -->
+        <nav class="hidden lg:flex items-center gap-8">
+            <div class="dropdown">
+                <a href="#" class="nav-link flex items-center gap-1" data-i18n="navPrecision">პრეციზიული სროლა <span class="text-[10px]">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="#" data-i18n="navBolt">ბოლტიანი შაშხანები</a>
+                    <a href="#" data-i18n="navSemi">ნახევრადავტომატური კარაბინები</a>
+                    <a href="#" data-i18n="navRimfire">მცირეკალიბრიანი შაშხანები</a>
+                </div>
+            </div>
+            <a href="#" class="nav-link" data-i18n="navTournaments">ტურნირები</a>
+            <a href="#" class="nav-link" data-i18n="navBlog">ვისწავლოთ ერთად</a>
+            <a href="#" class="nav-link" data-i18n="navShop">მაღაზია</a>
+            <a href="#" class="nav-link" data-i18n="navAbout">ჩვენს შესახებ</a>
+        </nav>
+
+        <!-- Right Side: Lang + Mobile Toggle -->
+        <div class="flex items-center gap-4">
+            <div class="flex gap-1">
+                <button class="lang-btn active !px-2 !py-1" data-lang="ka">GE</button>
+                <button class="lang-btn !px-2 !py-1" data-lang="en">EN</button>
+                <button class="lang-btn !px-2 !py-1" data-lang="ua">UA</button>
+            </div>
+            <button class="lg:hidden gold text-2xl">☰</button>
+        </div>
+    </header>
+
+    <!-- Ad Banner Carousel (Rotating Sponsor Banners) -->
+    <div class="relative z-10 pt-20">
+        <div class="ad-carousel">
+            <div class="ad-track" id="adTrack">
+                <!-- Sample Ad Slides -->
+                <div class="ad-slide">
+                    <div class="brand text-4xl text-gray-700 opacity-50">SPONSOR BANNER 1 (1200x200)</div>
+                </div>
+                <div class="ad-slide">
+                    <div class="brand text-4xl text-gray-700 opacity-50">SPONSOR BANNER 2 (1200x200)</div>
+                </div>
+                <div class="ad-slide">
+                    <div class="brand text-4xl text-gray-700 opacity-50">SPONSOR BANNER 3 (1200x200)</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
-    <div class="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 py-20">
+    <div class="relative z-10 flex flex-col justify-center items-center px-4 py-10">
         
         <!-- Logo & Title -->
         <div class="text-center mb-10">
@@ -213,6 +337,14 @@
         // i18n Translations
         const translations = {
             ka: {
+                navPrecision: "პრეციზიული სროლა",
+                navBolt: "ბოლტიანი შაშხანები",
+                navSemi: "ნახევრადავტომატური კარაბინები",
+                navRimfire: "მცირეკალიბრიანი შაშხანები",
+                navTournaments: "ტურნირები",
+                navBlog: "ვისწავლოთ ერთად",
+                navShop: "მაღაზია",
+                navAbout: "ჩვენს შესახებ",
                 tagline: "პრეციზიული სროლის ფედერაციაში შემავალი ზუსტი და პრეციზიული სროლის სახეობების კლუბი აჭარის რეგიონში",
                 wind: "ქარი",
                 temp: "ტემპ",
@@ -229,6 +361,14 @@
                 partner: "PRS GEORGIA • ოფიციალური პარტნიორი"
             },
             en: {
+                navPrecision: "Precision Shooting",
+                navBolt: "Bolt Action",
+                navSemi: "Semi-Auto Carbines",
+                navRimfire: "Rimfire Rifles",
+                navTournaments: "Tournaments",
+                navBlog: "Learn Together",
+                navShop: "Shop",
+                navAbout: "About Us",
                 tagline: "Precision Rifle Shooting Range in Georgia",
                 wind: "WIND",
                 temp: "TEMP",
@@ -245,6 +385,14 @@
                 partner: "PRS GEORGIA • Official Partner"
             },
             ua: {
+                navPrecision: "Високоточна стрільба",
+                navBolt: "Болтові гвинтівки",
+                navSemi: "Напівавтоматичні карабіни",
+                navRimfire: "Малокаліберні гвинтівки",
+                navTournaments: "Турніри",
+                navBlog: "Вчимося разом",
+                navShop: "Магазин",
+                navAbout: "Про нас",
                 tagline: "Полігон для точної стрільби в Грузії",
                 wind: "ВІТЕР",
                 temp: "ТЕМП",
@@ -294,6 +442,18 @@
         
         // Set initial language
         setLanguage(currentLang);
+
+        // Ad Carousel Logic
+        const adTrack = document.getElementById('adTrack');
+        const adSlides = document.querySelectorAll('.ad-slide');
+        let adIndex = 0;
+        
+        setInterval(() => {
+            if (adSlides.length > 0) {
+                adIndex = (adIndex + 1) % adSlides.length;
+                adTrack.style.transform = `translateX(-${adIndex * 100}%)`;
+            }
+        }, 5000);
     </script>
 </body>
 </html>
