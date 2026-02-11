@@ -6,7 +6,7 @@
       "stage": 1,
       "name": "Stage 1",
       "subtitle": "Long Range",
-      "participants": [
+      "scores": [
         {"name":"ლევან გულიკაშვილი","shots":[1,1,1,1,1,1,1,1,1,1],"score":10},
         {"name":"ალექსანდრე ტატევოსიანი","shots":[1,0,0,1,0,0,1,0,1,0],"score":4},
         {"name":"მიხა თამასიძე","shots":[1,1,1,1,1,1,1,1,0,1],"score":9},
@@ -36,7 +36,7 @@
       "stage": 2,
       "name": "Stage 2",
       "subtitle": "Tire Breaker",
-      "participants": [
+      "scores": [
         {"name":"ლევან გულიკაშვილი","shots":[1,1,1,1,1,1,1,1,1,1],"score":10},
         {"name":"ალექსანდრე ტატევოსიანი","shots":[0,0,0,0,0,0,0,0,0,0],"score":0},
         {"name":"მიხა თამასიძე","shots":[1,1,1,1,0,1,0,1,0,1],"score":7},
@@ -66,7 +66,7 @@
       "stage": 3,
       "name": "Stage 3",
       "subtitle": "Mid Range",
-      "participants": [
+      "scores": [
         {"name":"ლევან გულიკაშვილი","shots":[1,1,1,1,0,1,1,1,1,0],"score":8},
         {"name":"ალექსანდრე ტატევოსიანი","shots":[1,1,0,1,1,1,0,1,0,1],"score":7},
         {"name":"მიხა თამასიძე","shots":[1,1,1,1,1,1,1,1,1,1],"score":10},
@@ -96,7 +96,7 @@
       "stage": 4,
       "name": "Stage 4",
       "subtitle": "Barricade",
-      "participants": [
+      "scores": [
         {"name":"ლევან გულიკაშვილი","shots":[1,1,1,1,1,1,1,1,0,1],"score":9},
         {"name":"ალექსანდრე ტატევოსიანი","shots":[0,0,0,1,0,0,0,1,0,0],"score":2},
         {"name":"მიხა თამასიძე","shots":[1,0,1,1,0,1,1,1,0,1],"score":7},
@@ -126,7 +126,7 @@
       "stage": 5,
       "name": "Stage 5",
       "subtitle": "Doubletap",
-      "participants": [
+      "scores": [
         {"name":"ლევან გულიკაშვილი","shots":[1,1,1,1,1,1,1,0,1,1],"score":9},
         {"name":"ალექსანდრე ტატევოსიანი","shots":[0,1,0,0,0,1,0,0,1,0],"score":3},
         {"name":"მიხა თამასიძე","shots":[1,1,1,1,1,1,1,1,1,1],"score":10},
@@ -156,7 +156,7 @@
       "stage": 6,
       "name": "Stage 6",
       "subtitle": "Tree Log",
-      "participants": [
+      "scores": [
         {"name":"ლევან გულიკაშვილი","shots":[1,1,1,1,1,1,1,1,1,1],"score":10},
         {"name":"ალექსანდრე ტატევოსიანი","shots":[0,0,0,0,0,1,0,0,0,0],"score":1},
         {"name":"მიხა თამასიძე","shots":[1,1,1,1,1,1,1,1,1,0],"score":9},
