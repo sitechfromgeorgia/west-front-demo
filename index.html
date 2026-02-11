@@ -162,6 +162,18 @@
             opacity: 1;
         }
 
+        /* Article Card Styles */
+        .article-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(197, 160, 101, 0.2);
+            transition: all 0.3s;
+        }
+        .article-card:hover {
+            border-color: rgba(197, 160, 101, 0.5);
+            transform: translateY(-5px);
+            background: rgba(30, 30, 30, 0.8);
+        }
+
         .data-box {
             background: rgba(0,0,0,0.7);
             border: 1px solid rgba(197, 160, 101, 0.4);
@@ -324,6 +336,35 @@
 
     <!-- Partner Social Media Section -->
     <div class="relative z-10 py-10 border-t border-white/5 bg-black/30">
+        <div class="container mx-auto px-4">
+            <h3 class="brand text-3xl gold mb-10 tracking-widest text-center" data-i18n="tournamentsTitle">ჩატარებული ტურნირები</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- West Wind 2026 Article -->
+                <article class="article-card rounded-xl overflow-hidden flex flex-col">
+                    <img src="assets/west-wind-2026.jpg" alt="West Wind 2026" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h4 class="brand text-2xl gold mb-4" data-i18n="ww2026Title">West Wind 2026</h4>
+                        <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6" data-i18n="ww2026Text">
+                            საქართველოში გაიმართა „West Wind 2026“ — პირველი ეროვნული დონის ჩემპიონატი ნახევრადავტომატური კარაბინებიდან პრეციზიულ სროლაში. ტურნირი ორგანიზებული იყო ბათუმში მოქმედი სპორტული სროლის კლუბის, West Front Range-ის მიერ...
+                        </p>
+                        <div class="mt-auto pt-6 border-t border-white/5 flex justify-between items-center text-xs text-gray-500 uppercase tracking-widest font-bold">
+                            <span>Batum, Georgia</span>
+                            <span>2026</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Placeholder for next article -->
+                <div class="article-card rounded-xl border-dashed border-gray-800 flex items-center justify-center p-10 opacity-30">
+                    <span class="brand text-gray-600">COMING SOON</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partner Social Media Section -->
+    <div class="relative z-10 py-10 border-t border-white/5 bg-black/30">
         <div class="container mx-auto px-4 text-center">
             <h3 class="brand text-xl gold mb-6 tracking-widest" data-i18n="partnersSocial">პარტნიორების სოციალური მედია</h3>
             <div class="flex flex-wrap justify-center gap-10">
@@ -388,7 +429,10 @@
                 featureTraining: "წვრთნა",
                 cta: "რეგისტრაცია",
                 partner: "PRS GEORGIA • ოფიციალური პარტნიორი",
-                partnersSocial: "პარტნიორების სოციალური მედია"
+                partnersSocial: "პარტნიორების სოციალური მედია",
+                tournamentsTitle: "ჩატარებული ტურნირები",
+                ww2026Title: "West Wind 2026",
+                ww2026Text: "საქართველოში გაიმართა „West Wind 2026“ — პირველი ეროვნული დონის ჩემპიონატი ნახევრადავტომატური კარაბინებიდან პრეციზიულ სროლაში. ტურნირი ორგანიზებული იყო ბათუმში მოქმედი სპორტული სროლის კლუბის, West Front Range-ის მიერ, რომელიც პრეციზიული სროლის ფედერაციის წევრ ორგანიზაციას წარმოადგენს. ჩემპიონატი ექვსი საფეხურისგან შედგებოდა. თითოეულ ეტაპზე მონაწილეებს 10 ვაზნის გამოყენებით განსაზღვრულ სამიზნეზე სროლა უწევდათ. შეჯიბრი მაღალი კონკურენციის პირობებში წარიმართა და საბოლოოდ გამარჯვებულები საერთო ქულათა რაოდენობის მიხედვით გამოვლინდნენ. პირველი ადგილი დაიკავა ზურაბ დოლენჯაშვილმა (60/57), მეორე ადგილი — ლევან გულიკაშვილმა (60/56), ხოლო მესამე ადგილი — ოთარ კიშინსკიმ (60/53). ტურნირის საორგანიზაციო პროცესში ჩართული იყვნენ გენერალ მაზნიაშვილის სახელობის ახალგაზრდული ლეგიონის მოხალისეები. ორგანიზატორებმა ასევე მადლობა გადაუხადეს სპორტული სროლის კლუბ „ბალისტას“ გაწეული მხარდაჭერისთვის. ორგანიზატორების განცხადებით, მსგავსი ფორმატის შეჯიბრებები მომავალშიც გაგრძელდება."
             },
             en: {
                 navPrecision: "Precision Shooting",
@@ -413,7 +457,10 @@
                 featureTraining: "Training",
                 cta: "Register",
                 partner: "PRS GEORGIA • Official Partner",
-                partnersSocial: "PARTNER SOCIAL MEDIA"
+                partnersSocial: "PARTNER SOCIAL MEDIA",
+                tournamentsTitle: "PAST TOURNAMENTS",
+                ww2026Title: "West Wind 2026",
+                ww2026Text: "Georgia hosted 'West Wind 2026' - the first national-level precision shooting championship for semi-automatic carbines. Organized by the West Front Range shooting club from Batumi, a member of the Precision Shooting Federation. The championship consisted of six stages, with high competition for the top spots. Winners were determined by total points: 1st place - Zurab Dolenjashvili, 2nd - Levan Gulikashvili, 3rd - Otar Kishinsky."
             },
             ua: {
                 navPrecision: "Високоточна стрільба",
