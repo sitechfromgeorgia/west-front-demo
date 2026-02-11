@@ -3,88 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>West Front | Precision Rifle Series</title>
+    <title>West Front Range | სასროლეთი</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Noto Sans Georgian', 'Oswald', sans-serif;
-            background-color: #1a1a1a;
+            font-family: 'Noto Sans Georgian', sans-serif;
+            background: #0a0a0a;
             color: #f0f0f0;
             overflow-x: hidden;
         }
+        .brand, .num { font-family: 'Oswald', sans-serif; }
         
-        /* Force Oswald for numbers and English brand names */
-        .num, .brand {
-            font-family: 'Oswald', sans-serif;
+        /* Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
         }
-
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active { opacity: 1; }
+        
+        /* Ken Burns Effect */
+        @keyframes kenburns {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.1) translate(-1%, -1%); }
+            100% { transform: scale(1) translate(0, 0); }
+        }
+        .slide.active {
+            animation: kenburns 10s ease-in-out infinite;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.85) 100%);
+            z-index: 0;
+        }
+        
         .glass-card {
-            background: rgba(30, 30, 30, 0.7);
+            background: rgba(20, 20, 20, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(197, 160, 101, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(197, 160, 101, 0.3);
         }
         
-        .grid-bg {
-            background-image: 
-                linear-gradient(rgba(197, 160, 101, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(197, 160, 101, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+        .gold { color: #c5a065; }
+        .gold-border { border-color: rgba(197, 160, 101, 0.5); }
         
         .neon-glow {
-            text-shadow: 0 0 5px rgba(197, 160, 101, 0.5), 0 0 10px rgba(197, 160, 101, 0.3);
+            text-shadow: 0 0 10px rgba(197, 160, 101, 0.5);
         }
         
-        .gold-border {
-            border: 1px solid rgba(197, 160, 101, 0.5);
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-        }
-        
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
-        }
-        
-        .stats-ticker {
-            animation: slide 30s linear infinite;
-        }
-        
-        @keyframes slide {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
         .lang-btn {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             border: 1px solid #c5a065;
             color: #c5a065;
-            padding: 5px 10px;
+            padding: 8px 14px;
             font-family: 'Oswald', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.3s;
             cursor: pointer;
         }
@@ -92,387 +79,221 @@
             background: #c5a065;
             color: #000;
         }
+        
+        .data-box {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(197, 160, 101, 0.4);
+            font-family: 'Oswald', monospace;
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Smooth transitions for language change */
+        [data-i18n] {
+            transition: opacity 0.3s ease;
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow">
+        <div class="slide active" style="background-image: url('assets/shooter-1.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/spotter.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/competition-snow.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/spotters-group.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/awards.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/event-poster.jpg');"></div>
+    </div>
+    <div class="overlay"></div>
 
     <!-- Language Switcher -->
-    <div class="fixed top-4 right-4 z-50 flex gap-2">
-        <button onclick="setLang('ka')" class="lang-btn active" id="btn-ka">GEO</button>
-        <button onclick="setLang('uk')" class="lang-btn" id="btn-uk">UKR</button>
-        <button onclick="setLang('en')" class="lang-btn" id="btn-en">ENG</button>
+    <div class="fixed top-4 right-4 z-50 flex gap-1">
+        <button class="lang-btn active" data-lang="ka">🇬🇪 GEO</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 ENG</button>
+        <button class="lang-btn" data-lang="ua">🇺🇦 UKR</button>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center parallax-bg" style="background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%231a1a1a\'/><path d=\'M0 0L100 100M100 0L0 100\' stroke=\'%23c5a065\' stroke-width=\'0.5\' opacity=\'0.1\'/></svg>')">
-        <div class="text-center z-10 px-4">
-            <h1 class="text-6xl md:text-8xl font-bold mb-4 neon-glow brand">WEST FRONT</h1>
-            <p class="text-xl md:text-3xl max-w-3xl mx-auto mb-10 text-gray-300 font-bold tracking-wide" data-i18n="hero_subtitle">
-                ზუსტი სროლის ჩემპიონატი ელიტარული მსროლელებისთვის
-            </p>
-            <button class="pulse bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-sm text-xl transition-all duration-300 transform hover:scale-105 uppercase tracking-wider" data-i18n="register_btn">
-                რეგისტრაცია
-            </button>
+    <!-- Main Content -->
+    <div class="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 py-20">
+        
+        <!-- Logo & Title -->
+        <div class="text-center mb-10">
+            <h1 class="brand text-5xl md:text-7xl font-bold tracking-wider neon-glow mb-3">WEST FRONT</h1>
+            <p class="text-xl md:text-2xl gold tracking-widest">RANGE</p>
         </div>
         
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-0 right-0 text-center animate-bounce">
-            <svg class="w-8 h-8 mx-auto text-[#c5a065]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
+        <!-- Tagline -->
+        <p class="text-lg md:text-xl text-center max-w-2xl mb-10 text-gray-300" data-i18n="tagline">
+            პრეციზიული სროლის ფედერაციაში შემავალი ზუსტი და პრეციზიული სროლის სახეობების კლუბი აჭარის რეგიონში
+        </p>
+        
+        <!-- Technical Data Display -->
+        <div class="flex flex-wrap justify-center gap-4 mb-10">
+            <div class="data-box px-6 py-3 rounded">
+                <span class="text-gray-400 text-sm" data-i18n="wind">ქარი</span>
+                <span class="gold num text-xl ml-2">4.2 M/S</span>
+            </div>
+            <div class="data-box px-6 py-3 rounded">
+                <span class="text-gray-400 text-sm" data-i18n="temp">ტემპ</span>
+                <span class="gold num text-xl ml-2">-2°C</span>
+            </div>
+            <div class="data-box px-6 py-3 rounded">
+                <span class="text-gray-400 text-sm" data-i18n="dist">დისტ</span>
+                <span class="gold num text-xl ml-2">850M</span>
+            </div>
+            <div class="data-box px-6 py-3 rounded flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full pulse-dot mr-2"></span>
+                <span class="text-green-400 text-sm" data-i18n="live">პირდაპირ</span>
+            </div>
         </div>
-    </section>
-
-    <!-- Stats Ticker -->
-    <div class="bg-gray-800 py-4 overflow-hidden border-y border-[#c5a065]/30">
-        <div class="stats-ticker flex whitespace-nowrap">
-            <div class="mx-12 text-xl flex items-center gap-2">
-                <span class="text-[#c5a065] font-bold num text-2xl">1,247</span> 
-                <span data-i18n="stat_participants">აქტიური მსროლელი</span>
+        
+        <!-- Event Banner -->
+        <div class="glass-card rounded-lg overflow-hidden mb-10 text-center max-w-2xl">
+            <img src="assets/steel-or-dust-event.jpg" alt="Steel or Dust - PRS Europe Pro Series" class="w-full h-48 md:h-64 object-cover">
+            <div class="p-8">
+                <div class="brand text-2xl md:text-3xl font-bold mb-2 tracking-wider">STEEL OR DUST</div>
+                <p class="text-gray-400 mb-3" data-i18n="eventSubtitle">ქართული პრეციზიის გამოწვევა • ევროპული პრო სერია</p>
+                <div class="brand text-3xl md:text-4xl font-bold gold mb-4" data-i18n="eventDate">15-16 მაისი 2026</div>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed" data-i18n="eventDesc">დიდი სიხარულით გაცნობებთ, რომ ისტორიაში პირველად, საქართველო PRS-ის ევროპის პრო სერიის მატჩს უმასპინძლებს! ღონისძიება 2026 წლის 15-16 მაისს ჩატარდება. ეს უმნიშვნელოვანესი ნაბიჯია ჩვენი ფედერაციისა და რეგიონის მსროლელთა საზოგადოებისთვის. მზად ვართ, ვუმასპინძლოთ საუკეთესო მსროლელებს ევროპიდან, რათა მათ საკუთარ თავზე გამოსცადონ მსოფლიო დონის სტეიჯები და ქართული სტუმართმოყვარეობა. 🇬🇪🇪🇺</p>
             </div>
-            <div class="mx-12 text-xl flex items-center gap-2">
-                <span class="text-[#c5a065] font-bold num text-2xl">2.4M+</span> 
-                <span data-i18n="stat_shots">გასროლა</span>
+        </div>
+        
+        <!-- Features -->
+        <div class="flex flex-wrap justify-center gap-8 mb-10">
+            <div class="text-center">
+                <div class="text-3xl mb-2">🎯</div>
+                <div class="text-sm text-gray-400" data-i18n="featureLong">შორი დისტანცია</div>
             </div>
-            <div class="mx-12 text-xl flex items-center gap-2">
-                <span class="text-[#c5a065] font-bold num text-2xl">386</span> 
-                <span data-i18n="stat_matches">მატჩი</span>
+            <div class="text-center">
+                <div class="text-3xl mb-2">🏔️</div>
+                <div class="text-sm text-gray-400" data-i18n="featureMountain">მთის რელიეფი</div>
             </div>
-            <div class="mx-12 text-xl flex items-center gap-2">
-                <span class="text-[#c5a065] font-bold num text-2xl">98%</span> 
-                <span data-i18n="stat_accuracy">სიზუსტე</span>
+            <div class="text-center">
+                <div class="text-3xl mb-2">🏆</div>
+                <div class="text-sm text-gray-400" data-i18n="featurePRS">PRS შეჯიბრებები</div>
             </div>
-            <div class="mx-12 text-xl flex items-center gap-2">
-                <span class="text-[#c5a065] font-bold num text-2xl">15</span> 
-                <span data-i18n="stat_countries">ქვეყანა</span>
+            <div class="text-center">
+                <div class="text-3xl mb-2">👥</div>
+                <div class="text-sm text-gray-400" data-i18n="featureTraining">წვრთნა</div>
             </div>
+        </div>
+        
+        <!-- CTA -->
+        <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded transition-all transform hover:scale-105 uppercase tracking-wider" data-i18n="cta">
+            რეგისტრაცია
+        </a>
+        
+        <!-- PRS Badge -->
+        <div class="mt-10 text-gray-500 text-sm tracking-wider" data-i18n="partner">
+            PRS GEORGIA • ოფიციალური პარტნიორი
         </div>
     </div>
-
-    <!-- Features Grid -->
-    <section class="py-24 px-4 grid-bg">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 neon-glow uppercase tracking-wide" data-i18n="features_title">
-                ტაქტიკური შესაძლებლობები
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Live Scoring Card -->
-                <div class="glass-card gold-border p-8 rounded-sm hover-lift relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition">
-                        <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-                    </div>
-                    <div class="text-[#c5a065] text-5xl mb-6">🎯</div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase" data-i18n="live_scoring_title">LIVE შედეგები</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed" data-i18n="live_scoring_desc">
-                        შედეგების განახლება რეალურ დროში. თვალი ადევნეთ თქვენს პროგრესს მსოფლიოს საუკეთესო მსროლელებთან შედარებით.
-                    </p>
-                    <div class="mt-auto">
-                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div class="h-full bg-[#c5a065] w-3/4 relative">
-                                <div class="absolute right-0 top-0 bottom-0 w-2 bg-white animate-pulse"></div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between mt-2 text-sm font-mono text-gray-400">
-                            <span data-i18n="your_score">თქვენი ქულა</span>
-                            <span class="text-[#c5a065]">87.4%</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Leaderboard Card -->
-                <div class="glass-card gold-border p-8 rounded-sm hover-lift relative overflow-hidden">
-                    <div class="text-[#c5a065] text-5xl mb-6">🏆</div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase" data-i18n="leaderboard_title">გლობალური რეიტინგი</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed" data-i18n="leaderboard_desc">
-                        იბრძოლეთ პირველობისთვის ელიტარულ დივიზიონში. რეიტინგი ახლდება ყოველი მატჩის შემდეგ.
-                    </p>
-                    <div class="mt-6 font-mono text-sm space-y-3">
-                        <div class="flex items-center justify-between p-2 bg-white/5 rounded border border-white/10">
-                            <div class="flex items-center">
-                                <span class="text-[#c5a065] font-bold mr-3">#1</span>
-                                <span>Sniper_X</span>
-                            </div>
-                            <span class="text-[#c5a065]">100.0</span>
-                        </div>
-                        <div class="flex items-center justify-between p-2 bg-white/5 rounded border border-white/10">
-                            <div class="flex items-center">
-                                <span class="text-gray-400 font-bold mr-3">#2</span>
-                                <span>TacticalPro</span>
-                            </div>
-                            <span class="text-gray-400">98.2</span>
-                        </div>
-                        <div class="flex items-center justify-between p-2 bg-red-900/20 rounded border border-red-500/30">
-                            <div class="flex items-center">
-                                <span class="text-red-500 font-bold mr-3">#3</span>
-                                <span data-i18n="you">თქვენ</span>
-                            </div>
-                            <span class="text-red-400">95.4</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Match Calendar Card -->
-                <div class="glass-card gold-border p-8 rounded-sm hover-lift relative overflow-hidden">
-                    <div class="text-[#c5a065] text-5xl mb-6">📅</div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase" data-i18n="calendar_title">მატჩების კალენდარი</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed" data-i18n="calendar_desc">
-                        იხილეთ მომავალი ტურნირები, სავარჯიშო შეკრებები და სპეციალური ივენთები. დაგეგმეთ თქვენი სეზონი.
-                    </p>
-                    <div class="mt-6 space-y-3">
-                        <div class="flex items-center text-sm">
-                            <div class="w-2 h-2 bg-[#c5a065] rounded-full mr-3 shadow-[0_0_10px_#c5a065]"></div>
-                            <span data-i18n="event_championship">გლობალური ჩემპიონატი</span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <div class="w-2 h-2 bg-red-600 rounded-full mr-3 shadow-[0_0_10px_red]"></div>
-                            <span data-i18n="event_training">ელიტარული წვრთნები</span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <div class="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
-                            <span data-i18n="event_regional">რეგიონალური საკვალიფიკაციო</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tactical Info Section -->
-    <section class="py-24 bg-black/80 relative">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-8 neon-glow uppercase leading-tight" data-i18n="precision_title">
-                        სიზუსტე ექსტრემალურ დისტანციებზე
-                    </h2>
-                    <p class="text-lg text-gray-300 mb-6 leading-relaxed border-l-2 border-[#c5a065] pl-6" data-i18n="precision_desc_1">
-                        West Front წარმოადგენს ზუსტი სროლის მწვერვალს. ჩვენი ტურნირები მოიცავს სამიზნეებს 1000+ მეტრზე, რაც მოითხოვს ბალისტიკის, ქარის კითხვისა და მენტალური მდგრადობის სრულ ოსტატობას.
-                    </p>
-                    <p class="text-gray-400 mb-10 pl-6" data-i18n="precision_desc_2">
-                        სერტიფიცირებული სასროლეთებით 15 ქვეყანაში და წამყვან მწარმოებლებთან პარტნიორობით, ჩვენ გთავაზობთ ყველაზე მკაცრ საგამოცდო პოლიგონს.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="glass-card gold-border p-6 rounded-sm">
-                            <h3 class="text-xl font-bold text-[#c5a065] mb-3 uppercase" data-i18n="ballistics_title">ბალისტიკური კალკულატორი</h3>
-                            <p class="text-sm text-gray-400" data-i18n="ballistics_desc">მოწინავე ატმოსფერული სენსორები და ზუსტი გამოთვლები.</p>
-                        </div>
-                        <div class="glass-card gold-border p-6 rounded-sm">
-                            <h3 class="text-xl font-bold text-[#c5a065] mb-3 uppercase" data-i18n="weather_title">მონიტორინგი</h3>
-                            <p class="text-sm text-gray-400" data-i18n="weather_desc">ქარის სიჩქარე, მიმართულება, ტემპერატურა და ტენიანობა რეალურ დროში.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-card gold-border rounded-lg p-2 transform rotate-1 hover:rotate-0 transition duration-500">
-                    <!-- SVG Placeholder for target graphic -->
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" class="w-full h-auto rounded bg-[#111]">
-                        <defs>
-                            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#333" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#grid)" />
-                        <!-- Crosshair -->
-                        <line x1="250" y1="0" x2="250" y2="400" stroke="#c5a065" stroke-width="1" opacity="0.5"/>
-                        <line x1="0" y1="200" x2="500" y2="200" stroke="#c5a065" stroke-width="1" opacity="0.5"/>
-                        <circle cx="250" cy="200" r="150" fill="none" stroke="#c5a065" stroke-width="2" opacity="0.3"/>
-                        <circle cx="250" cy="200" r="100" fill="none" stroke="#c5a065" stroke-width="2" opacity="0.5"/>
-                        <circle cx="250" cy="200" r="50" fill="none" stroke="#c5a065" stroke-width="2" opacity="0.8"/>
-                        <circle cx="250" cy="200" r="5" fill="#dc2626"/>
-                        <!-- Data Overlay -->
-                        <text x="20" y="40" fill="#c5a065" font-family="monospace" font-size="12">WIND: 4.2 MS / 270°</text>
-                        <text x="20" y="60" fill="#c5a065" font-family="monospace" font-size="12">TEMP: 24°C</text>
-                        <text x="20" y="80" fill="#c5a065" font-family="monospace" font-size="12">DIST: 850M</text>
-                        <text x="400" y="380" fill="#dc2626" font-family="monospace" font-size="12" font-weight="bold">TARGET ACQUIRED</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Footer -->
-    <footer class="bg-black py-16 border-t border-[#c5a065]">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div>
-                    <h3 class="text-3xl font-bold mb-6 neon-glow brand">WEST FRONT</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed" data-i18n="footer_about">
-                        პრემიუმ კლასის ზუსტი სროლის სერია ელიტარული მსროლელებისთვის მთელ მსოფლიოში.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="text-sm font-bold mb-6 text-[#c5a065] uppercase tracking-widest" data-i18n="footer_competitions">ტურნირები</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-[#c5a065] transition" data-i18n="footer_champ">გლობალური ჩემპიონატი</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-[#c5a065] transition" data-i18n="footer_qual">რეგიონალური საკვალიფიკაციო</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-[#c5a065] transition" data-i18n="footer_camps">სავარჯიშო ბანაკები</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-sm font-bold mb-6 text-[#c5a065] uppercase tracking-widest" data-i18n="footer_resources">რესურსები</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-[#c5a065] transition" data-i18n="footer_calc">ბალისტიკური კალკულატორი</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-[#c5a065] transition" data-i18n="footer_data">ამინდის მონაცემები</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-[#c5a065] transition" data-i18n="footer_guides">ეკიპირების გზამკვლევი</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-sm font-bold mb-6 text-[#c5a065] uppercase tracking-widest" data-i18n="footer_contact">კონტაქტი</h4>
-                    <address class="text-gray-400 not-italic text-sm leading-loose">
-                        West Front Precision<br>
-                        Tactical Operations Center<br>
-                        Tbilisi, Georgia<br>
-                        <br>
-                        ops@westfrontprs.com<br>
-                        +995 555 00 00 00
-                    </address>
-                </div>
-            </div>
-            <div class="border-t border-gray-900 mt-16 pt-8 text-center text-gray-600 text-xs">
-                <p>&copy; 2026 West Front Precision Rifle Series. All rights reserved. Slava Ukraini! 🇺🇦</p>
-            </div>
-        </div>
+    <footer class="relative z-10 text-center py-6 text-gray-600 text-sm">
+        © 2026 West Front Range • AMAT VICTORIA CURAM
     </footer>
 
     <script>
+        // Slideshow
+        const slides = document.querySelectorAll('.slide');
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000);
+        
+        // i18n Translations
         const translations = {
             ka: {
-                hero_subtitle: "ზუსტი სროლის ჩემპიონატი ელიტარული მსროლელებისთვის",
-                register_btn: "რეგისტრაცია",
-                stat_participants: "აქტიური მსროლელი",
-                stat_shots: "გასროლა",
-                stat_matches: "მატჩი",
-                stat_accuracy: "სიზუსტე",
-                stat_countries: "ქვეყანა",
-                features_title: "ტაქტიკური შესაძლებლობები",
-                live_scoring_title: "LIVE შედეგები",
-                live_scoring_desc: "შედეგების განახლება რეალურ დროში. თვალი ადევნეთ თქვენს პროგრესს მსოფლიოს საუკეთესო მსროლელებთან შედარებით.",
-                your_score: "თქვენი ქულა",
-                leaderboard_title: "გლობალური რეიტინგი",
-                leaderboard_desc: "იბრძოლეთ პირველობისთვის ელიტარულ დივიზიონში. რეიტინგი ახლდება ყოველი მატჩის შემდეგ.",
-                you: "თქვენ",
-                calendar_title: "მატჩების კალენდარი",
-                calendar_desc: "იხილეთ მომავალი ტურნირები, სავარჯიშო შეკრებები და სპეციალური ივენთები. დაგეგმეთ თქვენი სეზონი.",
-                event_championship: "გლობალური ჩემპიონატი",
-                event_training: "ელიტარული წვრთნები",
-                event_regional: "რეგიონალური საკვალიფიკაციო",
-                precision_title: "სიზუსტე ექსტრემალურ დისტანციებზე",
-                precision_desc_1: "West Front წარმოადგენს ზუსტი სროლის მწვერვალს. ჩვენი ტურნირები მოიცავს სამიზნეებს 1000+ მეტრზე, რაც მოითხოვს ბალისტიკის, ქარის კითხვისა და მენტალური მდგრადობის სრულ ოსტატობას.",
-                precision_desc_2: "სერტიფიცირებული სასროლეთებით 15 ქვეყანაში და წამყვან მწარმოებლებთან პარტნიორობით, ჩვენ გთავაზობთ ყველაზე მკაცრ საგამოცდო პოლიგონს.",
-                ballistics_title: "ბალისტიკური კალკულატორი",
-                ballistics_desc: "მოწინავე ატმოსფერული სენსორები და ზუსტი გამოთვლები.",
-                weather_title: "მონიტორინგი",
-                weather_desc: "ქარის სიჩქარე, მიმართულება, ტემპერატურა და ტენიანობა რეალურ დროში.",
-                footer_about: "პრემიუმ კლასის ზუსტი სროლის სერია ელიტარული მსროლელებისთვის მთელ მსოფლიოში.",
-                footer_competitions: "ტურნირები",
-                footer_champ: "გლობალური ჩემპიონატი",
-                footer_qual: "რეგიონალური საკვალიფიკაციო",
-                footer_camps: "სავარჯიშო ბანაკები",
-                footer_resources: "რესურსები",
-                footer_calc: "ბალისტიკური კალკულატორი",
-                footer_data: "ამინდის მონაცემები",
-                footer_guides: "ეკიპირების გზამკვლევი",
-                footer_contact: "კონტაქტი"
-            },
-            uk: {
-                hero_subtitle: "Чемпіонат з високоточної стрільби для елітних стрільців",
-                register_btn: "РЕЄСТРАЦІЯ",
-                stat_participants: "Активні стрільці",
-                stat_shots: "Пострілів",
-                stat_matches: "Матчів",
-                stat_accuracy: "Точність",
-                stat_countries: "Країн",
-                features_title: "ТАКТИЧНІ МОЖЛИВОСТІ",
-                live_scoring_title: "LIVE РЕЗУЛЬТАТИ",
-                live_scoring_desc: "Оновлення результатів у реальному часі. Слідкуйте за своїм прогресом у порівнянні з найкращими стрільцями світу.",
-                your_score: "Ваш рахунок",
-                leaderboard_title: "ГЛОБАЛЬНИЙ РЕЙТИНГ",
-                leaderboard_desc: "Боротьба за першість в елітному дивізіоні. Рейтинг оновлюється після кожного матчу.",
-                you: "Ви",
-                calendar_title: "КАЛЕНДАР МАТЧІВ",
-                calendar_desc: "Перегляд майбутніх турнірів, тренувальних зборів та спеціальних подій. Плануйте свій сезон.",
-                event_championship: "Глобальний чемпіонат",
-                event_training: "Елітні тренування",
-                event_regional: "Регіональні кваліфікації",
-                precision_title: "ТОЧНІСТЬ НА ЕКСТРЕМАЛЬНИХ ДИСТАНЦІЯХ",
-                precision_desc_1: "West Front представляє вершину високоточної стрільби. Наші турніри включають цілі на дистанції 1000+ метрів, що вимагає повної майстерності балістики, читання вітру та ментальної стійкості.",
-                precision_desc_2: "З сертифікованими стрільбищами у 15 країнах та партнерством з провідними виробниками, ми пропонуємо найсуворіший випробувальний полігон.",
-                ballistics_title: "Балістичний калькулятор",
-                ballistics_desc: "Передові атмосферні датчики та точні розрахунки.",
-                weather_title: "Моніторинг",
-                weather_desc: "Швидкість вітру, напрямок, температура та вологість у реальному часі.",
-                footer_about: "Серія високоточної стрільби преміум-класу для елітних стрільців по всьому світу.",
-                footer_competitions: "ТУРНІРИ",
-                footer_champ: "Глобальний чемпіонат",
-                footer_qual: "Регіональні кваліфікації",
-                footer_camps: "Тренувальні табори",
-                footer_resources: "РЕСУРСИ",
-                footer_calc: "Балістичний калькулятор",
-                footer_data: "Дані про погоду",
-                footer_guides: "Посібник з екіпірування",
-                footer_contact: "КОНТАКТ"
+                tagline: "პრეციზიული სროლის ფედერაციაში შემავალი ზუსტი და პრეციზიული სროლის სახეობების კლუბი აჭარის რეგიონში",
+                wind: "ქარი",
+                temp: "ტემპ",
+                dist: "დისტ",
+                live: "პირდაპირ",
+                eventSubtitle: "ქართული პრეციზიის გამოწვევა • ევროპული პრო სერია",
+                eventDate: "15-16 მაისი 2026",
+                eventDesc: "დიდი სიხარულით გაცნობებთ, რომ ისტორიაში პირველად, საქართველო PRS-ის ევროპის პრო სერიის მატჩს უმასპინძლებს! ღონისძიება 2026 წლის 15-16 მაისს ჩატარდება. ეს უმნიშვნელოვანესი ნაბიჯია ჩვენი ფედერაციისა და რეგიონის მსროლელთა საზოგადოებისთვის. მზად ვართ, ვუმასპინძლოთ საუკეთესო მსროლელებს ევროპიდან, რათა მათ საკუთარ თავზე გამოსცადონ მსოფლიო დონის სტეიჯები და ქართული სტუმართმოყვარეობა. 🇬🇪🇪🇺",
+                featureLong: "შორი დისტანცია",
+                featureMountain: "მთის რელიეფი",
+                featurePRS: "PRS შეჯიბრებები",
+                featureTraining: "წვრთნა",
+                cta: "რეგისტრაცია",
+                partner: "PRS GEORGIA • ოფიციალური პარტნიორი"
             },
             en: {
-                hero_subtitle: "Precision Rifle Series for Elite Shooters",
-                register_btn: "REGISTER NOW",
-                stat_participants: "ACTIVE PARTICIPANTS",
-                stat_shots: "TOTAL SHOTS FIRED",
-                stat_matches: "MATCHES COMPLETED",
-                stat_accuracy: "ACCURACY RATE",
-                stat_countries: "COUNTRIES REPRESENTED",
-                features_title: "TACTICAL FEATURES",
-                live_scoring_title: "LIVE SCORING",
-                live_scoring_desc: "Real-time scoring updates with millisecond precision. Track your performance against elite competitors worldwide.",
-                your_score: "Your Score",
-                leaderboard_title: "GLOBAL LEADERBOARD",
-                leaderboard_desc: "Climb the ranks among the world's most elite precision shooters. Real-time global rankings updated continuously.",
-                you: "You",
-                calendar_title: "MATCH CALENDAR",
-                calendar_desc: "Access upcoming competitions, training schedules, and exclusive events. Plan your tactical preparation.",
-                event_championship: "Global Championship",
-                event_training: "Elite Training Camp",
-                event_regional: "Regional Qualifier",
-                precision_title: "PRECISION AT EXTREME DISTANCES",
-                precision_desc_1: "West Front represents the pinnacle of precision rifle competition. Our courses challenge shooters with targets at distances exceeding 1000 yards, requiring mastery of ballistics, wind reading, and mental fortitude.",
-                precision_desc_2: "With certified ranges across 15 countries and partnerships with leading manufacturers, we provide the most rigorous testing ground for elite marksmanship skills.",
-                ballistics_title: "Ballistic Calculators",
-                ballistics_desc: "Advanced atmospheric sensors and ballistics software for precise shot solutions.",
-                weather_title: "Weather Monitoring",
-                weather_desc: "Real-time wind speed, direction, temperature, and humidity data.",
-                footer_about: "The premier precision rifle series for elite shooters worldwide.",
-                footer_competitions: "COMPETITIONS",
-                footer_champ: "Global Championship",
-                footer_qual: "Regional Qualifiers",
-                footer_camps: "Training Camps",
-                footer_resources: "RESOURCES",
-                footer_calc: "Ballistics Calculator",
-                footer_data: "Weather Data",
-                footer_guides: "Equipment Guides",
-                footer_contact: "CONTACT"
+                tagline: "Precision Rifle Shooting Range in Georgia",
+                wind: "WIND",
+                temp: "TEMP",
+                dist: "DIST",
+                live: "LIVE",
+                eventSubtitle: "Georgian Precision Challenge • European Pro Series",
+                eventDate: "May 15-16, 2026",
+                eventDesc: "We are absolutely thrilled to announce that, for the first time ever, Georgia will host a PRS Europe Pro Series Match. The Event will take place on 15-16 May 2026. This is a monumental step for our federation and the shooting community in our region. We are ready to welcome the best shooters from across Europe to experience our world-class stages and Georgian hospitality. 🇬🇪🇪🇺",
+                featureLong: "Long Range",
+                featureMountain: "Mountain Terrain",
+                featurePRS: "PRS Competitions",
+                featureTraining: "Training",
+                cta: "Register",
+                partner: "PRS GEORGIA • Official Partner"
+            },
+            ua: {
+                tagline: "Полігон для точної стрільби в Грузії",
+                wind: "ВІТЕР",
+                temp: "ТЕМП",
+                dist: "ДИСТ",
+                live: "НАЖИВО",
+                eventSubtitle: "Грузинський виклик точності • Європейська Про Серія",
+                eventDate: "15-16 травня 2026",
+                eventDesc: "З великою радістю повідомляємо, що вперше в історії Грузія прийматиме матч PRS Europe Pro Series. Захід відбудеться 15-16 травня 2026 року. Це монументальний крок для нашої федерації та стрілецької спільноти нашого регіону. Ми готові прийняти найкращих стрільців з усієї Європи. 🇬🇪🇪🇺",
+                featureLong: "Далека дистанція",
+                featureMountain: "Гірський рельєф",
+                featurePRS: "PRS змагання",
+                featureTraining: "Тренування",
+                cta: "Реєстрація",
+                partner: "PRS GEORGIA • Офіційний партнер"
             }
         };
-
-        function setLang(lang) {
-            // Update buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-${lang}`).classList.add('active');
-
-            // Update text
+        
+        // Language Switcher
+        const langBtns = document.querySelectorAll('.lang-btn');
+        let currentLang = localStorage.getItem('lang') || 'ka';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            
+            // Update active button
+            langBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // Update all text elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
+                const key = el.dataset.i18n;
+                if (translations[lang] && translations[lang][key]) {
                     el.textContent = translations[lang][key];
                 }
             });
             
-            // Save preference
-            localStorage.setItem('wf_lang', lang);
+            // Update HTML lang attribute
+            document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
         }
-
+        
         // Init
-        const savedLang = localStorage.getItem('wf_lang') || 'ka';
-        setLang(savedLang);
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+        
+        // Set initial language
+        setLanguage(currentLang);
     </script>
 </body>
 </html>
