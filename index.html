@@ -146,14 +146,14 @@
         .ad-track {
             display: flex;
             transition: transform 1s ease-in-out;
-            width: 100%;
+            width: 300%;
         }
         .ad-slide {
-            flex: 0 0 100%;
+            flex: 0 0 33.333%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 180px;
+            height: 350px;
         }
         .ad-slide img {
             width: 100%;
@@ -556,7 +556,7 @@
         setInterval(() => {
             if (adSlides.length > 0) {
                 adIndex = (adIndex + 1) % adSlides.length;
-                adTrack.style.transform = `translateX(-${adIndex * 100}%)`;
+                adTrack.style.transform = `translateX(-${adIndex * 33.333}%)`;
             }
         }, 5000);
     </script>
